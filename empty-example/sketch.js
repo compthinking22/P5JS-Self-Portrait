@@ -32,11 +32,15 @@ function setup() {
   let trunkLength = 180;
   let trunkWidth = 30;
 
-  // Recursive function to draw trees with trunks and branches
-  drawTree(width / 4 - 100, height  - 200, trunkLength, PI / 2, 5, trunkWidth * 0.7);
-  drawTree((width * 3) / 4, height - 97, trunkLength, PI / 2, 5, trunkWidth * 0.7);
-  drawTree(width / 4, height  - 200, trunkLength, PI / 2, 5, trunkWidth * 0.7);
-  drawTree((width * 2) / 4 - 100, height - 97, trunkLength, PI / 2, 5, trunkWidth * 0.7);
+  // Recursive function to draw trees with trunks and branches -- drees drawn left to
+  // drawTree(left/right (-/+), up/down, size(-/+), , # of recursions,thickness)
+  drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
+  drawTree(width / 4 - 20, height - 0, trunkLength, PI / 2, 4.5, trunkWidth * 1.3);        //2
+  drawTree(width / 4 + 240, height - 230, trunkLength - 100, PI / 2, 2, trunkWidth * 0.3); //3 
+  drawTree(width / 4 + 530, height  - 90, trunkLength, PI / 2, 5, trunkWidth * 0.7);       //4
+  drawTree(width / 4 + 630, height - 90, trunkLength - 100, PI / 2, 2, trunkWidth * 0.7);  //5
+  drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);   //6
+
 
 }
 
@@ -46,12 +50,12 @@ function draw() {
   let customColors = [
     color(12, 58, 32), // Dark green
     color(53, 88, 47),  // Light green
-    color(185, 157, 20),
+    color(185, 157, 20), //ugly yellow
     color(251, 191, 7), // Yellow
     color(255, 164, 0), // Orange
     color(156, 40, 6),  // Red
-    color(84, 33, 10),   // Brown
-    color(51, 16, 0) //dark brown
+    color(84, 33, 10),  // Brown
+    color(51, 16, 0)    //dark brown
   ];
  
   // Calculate the number of colors in the gradient
@@ -70,14 +74,14 @@ function draw() {
   let fillColorYellowToBrown2 = calculateColor(thirdSetColorPosition, customColors);
 
   // Define arrays of custom positions for the circles
-   circleXPositionsGreenToBrown = [500, 300, 500, 80, 800, 800, 800, 360, 220, 200, 150, 285]; // Left, right
-   circleYPositionsGreenToBrown = [400, 430, 500, 415, 450, 500, 550, 400, 440, 280, 380, 360]; // Up, down
+   circleXPositionsGreenToBrown = [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900]; // Left, right
+   circleYPositionsGreenToBrown = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]; // Up, down
 
-  circleXPositionsYellowToBrown = [360, 220, 200, 160, 275]; // Left, right
-  circleYPositionsYellowToBrown = [400, 440, 290, 380, 370]; // Up, down
+  circleXPositionsYellowToBrown = [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900]; 
+  circleYPositionsYellowToBrown = [300, 300, 300, 300, 300, 300, 300, 300, 300, 300]; 
 
-  circleXPositionsYellowToBrown2 = [100, 205, 170, 270, 500]; // Left, right
-  circleYPositionsYellowToBrown2 = [100, 320, 380, 370, 100]; // Up, down
+  circleXPositionsYellowToBrown2 = [1300, 1400, 1500, 1600, 1700, 1800, 1900];
+  circleYPositionsYellowToBrown2 = [500,500, 500, 500, 500, 500, 500]; 
 
   // Draw circles starting from green to brown
   drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown);
@@ -120,7 +124,7 @@ function drawCirclesWithColors(xPositions, yPositions, baseColor) {
   for (let i = 0; i < circleCount; i++) {
     let circleX = xPositions[i];
     let circleY = yPositions[i];
-    let circleSize = map(i, 0, circleCount - 1, 50, 150);
+    let circleSize = map(i, 0, circleCount - 1, 50, 250);
 
     fill(baseColor);
     noStroke(); // No outline for circles
