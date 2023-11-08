@@ -7,6 +7,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight); // 800, 600
   topColor = color(6, 120, 164); // Dark blue (top color)
   bottomColor = color(118, 196, 226); // Lighter blue (bottom color)
+  //drawBackground(topColor, bottomColor);
+
   //tree
   greenToBrownColorPosition = 0;
   yellowToBrownColorPosition = 1;
@@ -47,6 +49,7 @@ function setup() {
 
 
 function draw() {
+
   // Array defined for custom colors starting from customColors[0]
   let customColors = [
     color(12, 58, 32), // Dark green
@@ -93,6 +96,20 @@ function draw() {
   // Draw circles starting from yellow to brown for the second set of circles
   drawCirclesWithColors(circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2, fillColorYellowToBrown2);
 }
+
+//I think I pasted this here by accident. doesn't seem to mess up anything when I take it out 
+/*function drawCirclesWithColors(xPositions, yPositions, baseColor) {
+  let circleCount = xPositions.length;
+  for (let i = 0; i < circleCount; i++) {
+    let circleX = xPositions[i];
+    let circleY = yPositions[i];
+    let circleSize = map(i, 0, circleCount - 1, 50, 250);
+
+    fill(baseColor);
+    noStroke(); // No outline for circles
+    ellipse(circleX, circleY, circleSize, circleSize);
+  }
+}*/
 
 function calculateColor(colorPosition, customColors) {
   let colorIndex1 = floor(colorPosition);
@@ -149,3 +166,31 @@ function drawTree(x, y, trunkLength, angle, levels, branchWidth) {
     drawTree(endX, endY, trunkLength * 0.7, angle + PI / 6, levels - 1.5, branchWidth * 0.7);
   }
 }
+
+/*function keyPressed() {
+  if (key === 'A' || key === 'a') {
+    topColor = color(6, 120, 164); // Dark blue (top color)
+    bottomColor = color(118, 196, 226); // Lighter blue (bottom color)
+    drawBackground(topColor, bottomColor);
+  } else if (key === 'S' || key === 's') {
+    topColor = color(41, 35, 74); // Dusty dark blue
+    bottomColor = color(255, 96, 62); // Orangy-pink
+    drawBackground(topColor, bottomColor);
+  } else if (key === 'D' || key === 'd') {
+    topColor = color(4, 1, 17);
+    bottomColor = color(43, 36, 78);
+    drawBackground(topColor, bottomColor);
+  }
+}
+
+function drawBackground(c1, c2) {
+  // Draw the background gradient within a specific region
+  for (let i = 0; i < 700; i++) {
+    let inter = map(i, 0, 700, 0, 1);
+    let c = lerpColor(c1, c2, inter);
+    stroke(c);
+    line(0, i, windowWidth, i);
+  }
+}*/
+
+//COME BACK TO LINES 11 AND 170-194 --> KEY PRESS BACKGROUND CHANGE
