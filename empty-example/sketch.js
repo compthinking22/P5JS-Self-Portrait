@@ -32,14 +32,15 @@ function setup() {
   let trunkLength = 180;
   let trunkWidth = 30;
 
-  // Recursive function to draw trees with trunks and branches -- drees drawn left to
+  // Recursive function to draw trees with trunks and branches 
   // drawTree(left/right (-/+), up/down, size(-/+), , # of recursions,thickness)
   drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
   drawTree(width / 4 - 20, height - 0, trunkLength, PI / 2, 4.5, trunkWidth * 1.3);        //2
   drawTree(width / 4 + 240, height - 230, trunkLength - 100, PI / 2, 2, trunkWidth * 0.3); //3 
   drawTree(width / 4 + 530, height  - 90, trunkLength, PI / 2, 5, trunkWidth * 0.7);       //4
   drawTree(width / 4 + 630, height - 90, trunkLength - 100, PI / 2, 2, trunkWidth * 0.7);  //5
-  drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);   //6
+  drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);     //7
+  drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //6
 
 
 }
@@ -50,7 +51,7 @@ function draw() {
   let customColors = [
     color(12, 58, 32), // Dark green
     color(53, 88, 47),  // Light green
-    color(185, 157, 20), //ugly yellow
+    color(151, 139, 27), //ugly yellow
     color(251, 191, 7), // Yellow
     color(255, 164, 0), // Orange
     color(156, 40, 6),  // Red
@@ -74,14 +75,14 @@ function draw() {
   let fillColorYellowToBrown2 = calculateColor(thirdSetColorPosition, customColors);
 
   // Define arrays of custom positions for the circles
-   circleXPositionsGreenToBrown = [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900]; // Left, right
-   circleYPositionsGreenToBrown = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]; // Up, down
+   circleXPositionsGreenToBrown = [730, 693, 760, 290, 340, 195, 105, 180, 1100, 1200, 1100, 1580, 1400, 1430, 1630, 1830]; // Left-, right+
+   circleYPositionsGreenToBrown = [530, 568, 580, 310, 370, 400, 405, 300, 500, 500, 400, 450, 580, 450, 300, 400]; // Up+, down-
 
-  circleXPositionsYellowToBrown = [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900]; 
-  circleYPositionsYellowToBrown = [300, 300, 300, 300, 300, 300, 300, 300, 300, 300]; 
+  circleXPositionsYellowToBrown = [713, 1070, 1140, 250, 155, 263, 898, 1810, 1700, 1540]; 
+  circleYPositionsYellowToBrown = [570, 690, 670, 360, 430, 445, 465, 530, 480, 600]; 
 
-  circleXPositionsYellowToBrown2 = [1300, 1400, 1500, 1600, 1700, 1800, 1900];
-  circleYPositionsYellowToBrown2 = [500,500, 500, 500, 500, 500, 500]; 
+  circleXPositionsYellowToBrown2 = [738, 1100, 940, 1640, 1730, -20, 60];
+  circleYPositionsYellowToBrown2 = [585, 715, 540, 670, 600, 700, 900]; 
 
   // Draw circles starting from green to brown
   drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown);
