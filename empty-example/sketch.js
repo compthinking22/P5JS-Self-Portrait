@@ -1,14 +1,20 @@
+// Toni Hunter Nov 13, 2023
+//Creative Coding P5JS  Self-Portrait Project
+
+//Global Variables
 let openingScreenTime = 10000; // 10 seconds
 let openingScreenFadeInTime = 2000; // 2 seconds for fade in
 let openingScreenStartTime;
 let openingTextOpacity = 255;
 
-let topColor, bottomColor; // Global
-let greenToBrownColorPosition, yellowToBrownColorPosition, thirdSetColorPosition;
+let topColor, bottomColor; // sky colors
+let greenToBrownColorPosition, yellowToBrownColorPosition, thirdSetColorPosition; //circle positions
 let circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2;
-var state = 4;
+var state = 4; //click states
 let fadeInComplete = false;
 
+
+/*------------------------------------------------------------------------------------ SETUP AND OPENING ------------------------------------------------------------------------------------ */
 
 function setup() {
 
@@ -66,7 +72,7 @@ function drawOpeningScreen() {
 }
 }
 
-
+/*----------------------------------------------------------------------------------- DRAW AND MAIN DRAW ----------------------------------------------------------------------------------- */
 
 function draw() {
   
@@ -168,6 +174,8 @@ function drawMainScene() {
     drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //8
   }
 }
+
+/*---------------------------------------------------------------------------------------- FUNCTIONS ---------------------------------------------------------------------------------------- */
 
 function calculateColor(colorPosition, customColors) {
   let colorIndex1 = floor(colorPosition);
