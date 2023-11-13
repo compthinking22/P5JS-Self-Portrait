@@ -9,7 +9,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight); // 800, 600
   topColor = color(4, 89, 121); // Dark blue (top color)
   bottomColor = color(118, 196, 226); // Lighter blue (bottom color)
-  //drawBackground(topColor, bottomColor);
 
   //tree color positions start
   greenToBrownColorPosition = 0;
@@ -28,9 +27,8 @@ function setup() {
     stroke(newColor); // Set the new color for the brush.
     line(0, i, windowWidth, i); // Draw a horizontal line for each color in the loop.
   }
-  
   // Draw the ground
-  stroke(115, 73, 0);
+  noStroke();
   fill(84, 33, 10);
   rect(0, 700, windowWidth); // Left/right, up/down, "size"
 }
@@ -75,6 +73,7 @@ function draw() {
   circleXPositionsYellowToBrown2 = [738, 1100, 940, 1640, 1730, -20, 60];
   circleYPositionsYellowToBrown2 = [585, 715, 540, 670, 600, 700, 900]; 
 
+
   let trunkLength = 180;
   let trunkWidth = 30;
 
@@ -110,7 +109,6 @@ function draw() {
     drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);     //7
     drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //8
   }
-
 }
 
 
@@ -140,6 +138,7 @@ function calculateColor(colorPosition, customColors) {
   return fillColor;
 }
 
+
 function drawCirclesWithColors(xPositions, yPositions, baseColor) {
   let circleCount = xPositions.length;
   for (let i = 0; i < circleCount; i++) {
@@ -150,6 +149,13 @@ function drawCirclesWithColors(xPositions, yPositions, baseColor) {
     fill(baseColor);
     noStroke(); // No outline for circles
     ellipse(circleX, circleY, circleSize, circleSize);
+  }
+}
+
+function mouseClicked() {
+  state --;
+  if (state == 0) {
+    state = 4;
   }
 }
 
@@ -169,6 +175,7 @@ function drawTree(x, y, trunkLength, angle, levels, branchWidth) {
     drawTree(endX, endY, trunkLength * 0.7, angle + PI / 6, levels - 1.5, branchWidth * 0.7);
   }
 }
+
 
 function keyPressed() {
   if (key === 'A' || key === 'a') {
@@ -195,20 +202,11 @@ function drawBackground(c1, c2) {
   }
 }
 
-function mouseClicked() {
-  state --;
-  if (state == 0) {
-    state = 4;
-  }
-}
 
-
-
-//COME BACK TO LINE 99
 
 //for leaf drop
-//start with global variable called stated, var state = 3 --> all leaves
-//in draw function,in a while loop,  if state == 3, draw light
+//start with global variable called state, var state = 4 --> all leaves
+//in draw function, if state == 3, draw light
 //if state <= 4, draw darker layer 
 //if state <= 3, draw darkest layer
 
