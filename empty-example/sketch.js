@@ -84,7 +84,8 @@ function drawMainScene() {
   fill(255); // Set text color to white
   textSize(18);
   textAlign(LEFT, TOP);
-  text("Press 'A' for blue colors\nPress 'S' for pink colors\nPress 'D' for dark colors", 20, 20);
+  text("Press 'A' for Morning Sky\nPress 'S' for Afternoon Sky\nPress 'D' for Night Sky\nMove mouse to change leaf color\nClick to remove leaves", 20, 20);
+
 
   // Array defined for custom colors starting from customColors[0]
   let customColors = [
