@@ -87,7 +87,7 @@ function drawMainScene() {
   drawBackground(topColor, bottomColor);
 
   fill(255); // Set text color to white
-  textSize(12);
+  textSize(14);
   textAlign(LEFT, TOP);
   text("Press 'A' for Morning Sky\nPress 'S' for Afternoon Sky\nPress 'D' for Night Sky\nMove mouse to change leaf color\nClick to remove leaves", 20, 20);
 
