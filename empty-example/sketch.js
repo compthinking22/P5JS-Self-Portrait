@@ -45,14 +45,19 @@ function drawOpeningScreen() {
   openingTextOpacity = map(elapsedTime, 0, openingScreenTime, 255, 0);
   openingTextOpacity = constrain(openingTextOpacity, 0, 255);
 
+  background(178, 176, 238);
+
   // Draw the fading text
   fill(255, 255, 255, openingTextOpacity);
-  textSize(48);
+  textSize(58);
   textAlign(CENTER, CENTER);
-  text("ABSCISSION (noun)\n\n", width / 2, height / 2)
-  
-  textSize(24);
-  text("The natural detachment of parts of a plant, typically dead leaves and ripe fruit.", width / 2, height / 2);
+  text("ABSCISSION\n\n", width / 2, height / 2)
+
+  textSize(26);
+  text("[ab·scis·sion] ; noun\n", width / 2, height / 2 )
+
+  textSize(38);
+  text("\n\n\nThe natural detachment of parts of a plant, typically dead leaves and ripe fruit.", width / 2, height / 2);
 
   if (openingTextOpacity <= 0) {
     fadeInComplete = true;
@@ -75,6 +80,11 @@ function draw() {
 function drawMainScene() {
 
   drawBackground(topColor, bottomColor);
+
+  fill(255); // Set text color to white
+  textSize(18);
+  textAlign(LEFT, TOP);
+  text("Press 'A' for blue colors\nPress 'S' for pink colors\nPress 'D' for dark colors", 20, 20);
 
   // Array defined for custom colors starting from customColors[0]
   let customColors = [
