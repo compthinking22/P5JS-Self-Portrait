@@ -1,10 +1,18 @@
+let openingScreenTime = 10000; // 10 seconds
+let openingScreenFadeInTime = 2000; // 2 seconds for fade in
+let openingScreenStartTime;
+let openingTextOpacity = 255;
+
 let topColor, bottomColor; // Global
 let greenToBrownColorPosition, yellowToBrownColorPosition, thirdSetColorPosition;
 let circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2;
 var state = 4;
+let fadeInComplete = false;
 
 
 function setup() {
+
+  openingScreenStartTime = millis(); // Set the start time for the opening screen
   //canvas
   createCanvas(windowWidth, windowHeight); // 800, 600
   topColor = color(4, 89, 121); // Dark blue (top color)
@@ -14,6 +22,7 @@ function setup() {
   greenToBrownColorPosition = 0;
   yellowToBrownColorPosition = 1;
   thirdSetColorPosition = 2;
+
  
   // This loop is for every line of canvas height, starts from the top of the canvas to the bottom of the canvas.
   for (let i = 0; i < 700; i++) { // Up to down (height)
@@ -26,15 +35,46 @@ function setup() {
     let newColor = lerpColor(topColor, bottomColor, m);
     stroke(newColor); // Set the new color for the brush.
     line(0, i, windowWidth, i); // Draw a horizontal line for each color in the loop.
-  }
-  // Draw the ground
-  noStroke();
-  fill(84, 33, 10);
-  rect(0, 700, windowWidth); // Left/right, up/down, "size"
+  } 
 }
 
 
+function drawOpeningScreen() {
+  // Calculate text opacity based on elapsed time
+  let elapsedTime = millis() - openingScreenStartTime;
+  openingTextOpacity = map(elapsedTime, 0, openingScreenTime, 255, 0);
+  openingTextOpacity = constrain(openingTextOpacity, 0, 255);
+
+  // Draw the fading text
+  fill(255, 255, 255, openingTextOpacity);
+  textSize(48);
+  textAlign(CENTER, CENTER);
+  text("ABSCISSION (noun)\n\n", width / 2, height / 2)
+  
+  textSize(24);
+  text("The natural detachment of parts of a plant, typically dead leaves and ripe fruit.", width / 2, height / 2);
+
+  if (openingTextOpacity <= 0) {
+    fadeInComplete = true;
+}
+}
+
+
+
 function draw() {
+  
+  if (!fadeInComplete) {
+    // If it is, draw the opening screen with fading text
+    drawOpeningScreen();
+  } else {
+    // If it's not the opening screen anymore, proceed with your main draw function
+    drawMainScene();
+  }
+}
+
+function drawMainScene() {
+
+  drawBackground(topColor, bottomColor);
 
   // Array defined for custom colors starting from customColors[0]
   let customColors = [
@@ -77,6 +117,11 @@ function draw() {
   let trunkLength = 180;
   let trunkWidth = 30;
 
+    // Draw the ground
+    noStroke();
+    fill(84, 33, 10);
+    rect(0, 700, windowWidth); // Left/right, up/down, "size"
+
   // Recursive function to draw trees with trunks and branches 
   // drawTree(left/right (-/+), up/down, size(-/+), , # of recursions,thickness)
   drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
@@ -110,7 +155,6 @@ function draw() {
     drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //8
   }
 }
-
 
 function calculateColor(colorPosition, customColors) {
   let colorIndex1 = floor(colorPosition);
@@ -201,14 +245,3 @@ function drawBackground(c1, c2) {
     line(0, i, windowWidth, i);
   }
 }
-
-
-
-//for leaf drop
-//start with global variable called state, var state = 4 --> all leaves
-//in draw function, if state == 3, draw light
-//if state <= 4, draw darker layer 
-//if state <= 3, draw darkest layer
-
-//function mousePressed(), state --. If state <=  0, state - 3.
-
