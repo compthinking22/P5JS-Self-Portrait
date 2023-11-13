@@ -1,23 +1,26 @@
 let topColor, bottomColor; // Global
 let greenToBrownColorPosition, yellowToBrownColorPosition, thirdSetColorPosition;
 let circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2;
+var state = 4;
+
 
 function setup() {
   //canvas
   createCanvas(windowWidth, windowHeight); // 800, 600
-  topColor = color(6, 120, 164); // Dark blue (top color)
+  topColor = color(4, 89, 121); // Dark blue (top color)
   bottomColor = color(118, 196, 226); // Lighter blue (bottom color)
   //drawBackground(topColor, bottomColor);
 
-  //tree
+  //tree color positions start
   greenToBrownColorPosition = 0;
   yellowToBrownColorPosition = 1;
   thirdSetColorPosition = 2;
  
   // This loop is for every line of canvas height, starts from the top of the canvas to the bottom of the canvas.
-  for (let i = 0; i < windowHeight; i++) { // Up to down (height)
+  for (let i = 0; i < 700; i++) { // Up to down (height)
     // Map function scales i values from 0 to canvas height and maps values from 0 to 1.
-    m = map(i, 0, windowHeight, 0, 1); // Changes how the gradient looks, DO NOT CHANGE!!
+    //map(i, 0, windowHeight, 0, 1)
+    m = map(i, 0, 700, 0, 1); // Changes how the gradient looks
 
     // lerpColor mixes top and bottom colors to make a color in between them.
     // Mixes colors based on location.
@@ -30,21 +33,6 @@ function setup() {
   stroke(115, 73, 0);
   fill(84, 33, 10);
   rect(0, 700, windowWidth); // Left/right, up/down, "size"
-
-  let trunkLength = 180;
-  let trunkWidth = 30;
-
-  // Recursive function to draw trees with trunks and branches 
-  // drawTree(left/right (-/+), up/down, size(-/+), , # of recursions,thickness)
-  drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
-  drawTree(width / 4 - 20, height - 0, trunkLength, PI / 2, 4.5, trunkWidth * 1.3);        //2
-  drawTree(width / 4 + 240, height - 230, trunkLength - 100, PI / 2, 2, trunkWidth * 0.3); //3 
-  drawTree(width / 4 + 530, height  - 90, trunkLength, PI / 2, 5, trunkWidth * 0.7);       //4
-  drawTree(width / 4 + 630, height - 90, trunkLength - 100, PI / 2, 2, trunkWidth * 0.7);  //5
-  drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);     //7
-  drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //6
-
-
 }
 
 
@@ -87,29 +75,44 @@ function draw() {
   circleXPositionsYellowToBrown2 = [738, 1100, 940, 1640, 1730, -20, 60];
   circleYPositionsYellowToBrown2 = [585, 715, 540, 670, 600, 700, 900]; 
 
-  // Draw circles starting from green to brown
-  drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown);
+  let trunkLength = 180;
+  let trunkWidth = 30;
 
-  // Draw circles starting from yellow to brown
-  drawCirclesWithColors(circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, fillColorYellowToBrown);
+  // Recursive function to draw trees with trunks and branches 
+  // drawTree(left/right (-/+), up/down, size(-/+), , # of recursions,thickness)
+  drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
+  drawTree(width / 4 - 20, height - 0, trunkLength, PI / 2, 4.5, trunkWidth * 1.3);        //2
+  drawTree(width / 4 + 240, height - 230, trunkLength - 100, PI / 2, 2, trunkWidth * 0.3); //3 
+  drawTree(width / 4 + 530, height  - 90, trunkLength, PI / 2, 5, trunkWidth * 0.7);       //4
+  drawTree(width / 4 + 630, height - 90, trunkLength - 100, PI / 2, 2, trunkWidth * 0.7);  //5
+  drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);     //7
+  drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //8
 
-  // Draw circles starting from yellow to brown for the second set of circles
-  drawCirclesWithColors(circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2, fillColorYellowToBrown2);
+  if (state == 4){ //ALL LEAVES
+    drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown); 
+    drawCirclesWithColors(circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, fillColorYellowToBrown);
+    drawCirclesWithColors(circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2, fillColorYellowToBrown2);
+    
+  }
+  if (state == 3){ //
+    drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown);
+    drawCirclesWithColors(circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, fillColorYellowToBrown);
+  }
+  if (state == 2){
+    drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown);
+  }
+  if (state == 1){ //BARE TREES
+    drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
+    drawTree(width / 4 - 20, height - 0, trunkLength, PI / 2, 4.5, trunkWidth * 1.3);        //2
+    drawTree(width / 4 + 240, height - 230, trunkLength - 100, PI / 2, 2, trunkWidth * 0.3); //3 
+    drawTree(width / 4 + 530, height  - 90, trunkLength, PI / 2, 5, trunkWidth * 0.7);       //4
+    drawTree(width / 4 + 630, height - 90, trunkLength - 100, PI / 2, 2, trunkWidth * 0.7);  //5
+    drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);     //7
+    drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //8
+  }
+
 }
 
-//I think I pasted this here by accident. doesn't seem to mess up anything when I take it out 
-/*function drawCirclesWithColors(xPositions, yPositions, baseColor) {
-  let circleCount = xPositions.length;
-  for (let i = 0; i < circleCount; i++) {
-    let circleX = xPositions[i];
-    let circleY = yPositions[i];
-    let circleSize = map(i, 0, circleCount - 1, 50, 250);
-
-    fill(baseColor);
-    noStroke(); // No outline for circles
-    ellipse(circleX, circleY, circleSize, circleSize);
-  }
-}*/
 
 function calculateColor(colorPosition, customColors) {
   let colorIndex1 = floor(colorPosition);
@@ -167,20 +170,19 @@ function drawTree(x, y, trunkLength, angle, levels, branchWidth) {
   }
 }
 
-/*function keyPressed() {
+function keyPressed() {
   if (key === 'A' || key === 'a') {
-    topColor = color(6, 120, 164); // Dark blue (top color)
+    // 6, 120, 164
+    topColor = color(4, 89, 121); // Dark blue (top color)
     bottomColor = color(118, 196, 226); // Lighter blue (bottom color)
-    drawBackground(topColor, bottomColor);
   } else if (key === 'S' || key === 's') {
     topColor = color(41, 35, 74); // Dusty dark blue
     bottomColor = color(255, 96, 62); // Orangy-pink
-    drawBackground(topColor, bottomColor);
   } else if (key === 'D' || key === 'd') {
     topColor = color(4, 1, 17);
     bottomColor = color(43, 36, 78);
-    drawBackground(topColor, bottomColor);
   }
+  drawBackground(topColor, bottomColor);
 }
 
 function drawBackground(c1, c2) {
@@ -191,6 +193,24 @@ function drawBackground(c1, c2) {
     stroke(c);
     line(0, i, windowWidth, i);
   }
-}*/
+}
 
-//COME BACK TO LINES 11 AND 170-194 --> KEY PRESS BACKGROUND CHANGE
+function mouseClicked() {
+  state --;
+  if (state == 0) {
+    state = 4;
+  }
+}
+
+
+
+//COME BACK TO LINE 99
+
+//for leaf drop
+//start with global variable called stated, var state = 3 --> all leaves
+//in draw function,in a while loop,  if state == 3, draw light
+//if state <= 4, draw darker layer 
+//if state <= 3, draw darkest layer
+
+//function mousePressed(), state --. If state <=  0, state - 3.
+
