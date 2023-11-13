@@ -14,9 +14,10 @@ function setup() {
 
   openingScreenStartTime = millis(); // Set the start time for the opening screen
   //canvas
+  //255, 213, 98 118, 196, 226
   createCanvas(windowWidth, windowHeight); // 800, 600
   topColor = color(4, 89, 121); // Dark blue (top color)
-  bottomColor = color(118, 196, 226); // Lighter blue (bottom color)
+  bottomColor = color(255, 213, 98); // Lighter blue (bottom color)
 
   //tree color positions start
   greenToBrownColorPosition = 0;
@@ -49,6 +50,7 @@ function drawOpeningScreen() {
 
   // Draw the fading text
   fill(255, 255, 255, openingTextOpacity);
+  noStroke()
   textSize(58);
   textAlign(CENTER, CENTER);
   text("ABSCISSION\n\n", width / 2, height / 2)
@@ -82,7 +84,7 @@ function drawMainScene() {
   drawBackground(topColor, bottomColor);
 
   fill(255); // Set text color to white
-  textSize(18);
+  textSize(12);
   textAlign(LEFT, TOP);
   text("Press 'A' for Morning Sky\nPress 'S' for Afternoon Sky\nPress 'D' for Night Sky\nMove mouse to change leaf color\nClick to remove leaves", 20, 20);
 
@@ -236,7 +238,7 @@ function keyPressed() {
   if (key === 'A' || key === 'a') {
     // 6, 120, 164
     topColor = color(4, 89, 121); // Dark blue (top color)
-    bottomColor = color(118, 196, 226); // Lighter blue (bottom color)
+    bottomColor = color(255, 213, 98); // Lighter blue (bottom color)
   } else if (key === 'S' || key === 's') {
     topColor = color(41, 35, 74); // Dusty dark blue
     bottomColor = color(255, 96, 62); // Orangy-pink
