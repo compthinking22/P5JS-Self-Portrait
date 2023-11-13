@@ -13,7 +13,6 @@ let circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, circleXPositions
 var state = 4; //click states
 let fadeInComplete = false;
 
-
 /*------------------------------------------------------------------------------------ SETUP AND OPENING ------------------------------------------------------------------------------------ */
 
 function setup() {
@@ -30,7 +29,6 @@ function setup() {
   yellowToBrownColorPosition = 1;
   thirdSetColorPosition = 2;
 
- 
   // This loop is for every line of canvas height, starts from the top of the canvas to the bottom of the canvas.
   for (let i = 0; i < 700; i++) { // Up to down (height)
     // Map function scales i values from 0 to canvas height and maps values from 0 to 1.
@@ -44,7 +42,6 @@ function setup() {
     line(0, i, windowWidth, i); // Draw a horizontal line for each color in the loop.
   } 
 }
-
 
 function drawOpeningScreen() {
   // Calculate text opacity based on elapsed time
@@ -93,7 +90,6 @@ function drawMainScene() {
   textSize(12);
   textAlign(LEFT, TOP);
   text("Press 'A' for Morning Sky\nPress 'S' for Afternoon Sky\nPress 'D' for Night Sky\nMove mouse to change leaf color\nClick to remove leaves", 20, 20);
-
 
   // Array defined for custom colors starting from customColors[0]
   let customColors = [
@@ -203,7 +199,6 @@ function calculateColor(colorPosition, customColors) {
   return fillColor;
 }
 
-
 function drawCirclesWithColors(xPositions, yPositions, baseColor) {
   let circleCount = xPositions.length;
   for (let i = 0; i < circleCount; i++) {
@@ -240,7 +235,6 @@ function drawTree(x, y, trunkLength, angle, levels, branchWidth) {
     drawTree(endX, endY, trunkLength * 0.7, angle + PI / 6, levels - 1.5, branchWidth * 0.7);
   }
 }
-
 
 function keyPressed() {
   if (key === 'A' || key === 'a') {
