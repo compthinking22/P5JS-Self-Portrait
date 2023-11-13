@@ -23,4 +23,4 @@ I really like how my project turned out, and although it's pretty simple to mess
 description is understandable enough, and I hope that after reading it, it makes things seem just a bit more easier for you.
 
 (On a side note, I also really like plants, the sky, and the clouds. They've helped me through my toughest times and even though some of them died, they still came back and showed
-me their beauty.)
+me their beauty.) 
