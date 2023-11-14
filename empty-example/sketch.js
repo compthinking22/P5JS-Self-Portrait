@@ -87,6 +87,7 @@ function drawMainScene() {
   drawBackground(topColor, bottomColor);
 
   fill(255); // Set text color to white
+  noStroke()
   textSize(14);
   textAlign(LEFT, TOP);
   text("Press 'A' for Morning Sky\nPress 'S' for Afternoon Sky\nPress 'D' for Night Sky\nMove mouse to change leaf color\nClick to remove leaves", 20, 20);
@@ -240,13 +241,13 @@ function keyPressed() {
   if (key === 'A' || key === 'a') {
     // 6, 120, 164
     topColor = color(4, 89, 121); // Dark blue (top color)
-    bottomColor = color(255, 213, 98); // Lighter blue (bottom color)
+    bottomColor = color(255, 213, 98); // Light yellow (bottom color)
   } else if (key === 'S' || key === 's') {
-    topColor = color(41, 35, 74); // Dusty dark blue
-    bottomColor = color(255, 96, 62); // Orangy-pink
+    topColor = color(58, 38, 71); // Dusty dark blue
+    bottomColor = color(255, 150, 98); // Orangy-pink
   } else if (key === 'D' || key === 'd') {
     topColor = color(4, 1, 17);
-    bottomColor = color(43, 36, 78);
+    bottomColor = color(59, 46, 68);
   }
   drawBackground(topColor, bottomColor);
 }
