@@ -15,11 +15,12 @@ let fadeInComplete = false;
 
 /*------------------------------------------------------------------------------------ SETUP AND OPENING ------------------------------------------------------------------------------------ */
 
+/*Setup function sets up opening screen variable (time for opening screen), the canvas background before keyPress, 
+  and starting indeces for circles */
 function setup() {
 
   openingScreenStartTime = millis(); // Set the start time for the opening screen
   //canvas
-  //255, 213, 98 118, 196, 226
   createCanvas(windowWidth, windowHeight); // 800, 600
   topColor = color(4, 89, 121); // Dark blue (top color)
   bottomColor = color(255, 213, 98); // Lighter blue (bottom color)
@@ -43,27 +44,33 @@ function setup() {
   } 
 }
 
+/*drawOpeningScreen Function is the opening screen before the main screen. Outputs background and text*/
 function drawOpeningScreen() {
   // Calculate text opacity based on elapsed time
   let elapsedTime = millis() - openingScreenStartTime;
   openingTextOpacity = map(elapsedTime, 0, openingScreenTime, 255, 0);
   openingTextOpacity = constrain(openingTextOpacity, 0, 255);
 
-  background(178, 176, 238);
+  //opening background color
+  background(116, 71, 79);
 
-  // Draw the fading text
+  // Fading text
   fill(255, 255, 255, openingTextOpacity);
-  noStroke()
+  noStroke() // no outline for letters
   textSize(58);
   textAlign(CENTER, CENTER);
+  textStyle(BOLD);
   text("ABSCISSION\n\n", width / 2, height / 2)
 
+  textStyle(ITALIC);
   textSize(26);
   text("[ab·scis·sion] ; noun\n", width / 2, height / 2 )
 
+  textStyle(BOLD);
   textSize(38);
   text("\n\n\nThe natural detachment of parts of a plant, typically dead leaves and ripe fruit.", width / 2, height / 2);
 
+  // Check is fading text is finished
   if (openingTextOpacity <= 0) {
     fadeInComplete = true;
 }
@@ -71,23 +78,27 @@ function drawOpeningScreen() {
 
 /*----------------------------------------------------------------------------------- DRAW AND MAIN DRAW ----------------------------------------------------------------------------------- */
 
+/*Draw function checks for fade in and continue to next screen */
 function draw() {
-  
   if (!fadeInComplete) {
-    // If it is, draw the opening screen with fading text
+    // If fade in is not complete, draw opening screen
     drawOpeningScreen();
   } else {
-    // If it's not the opening screen anymore, proceed with your main draw function
+    // If fade in is complete, draw main screen
     drawMainScene();
   }
 }
 
+/*drawMainScence is the overall project (before opening) -- circles, ground, trees, background. drawBackground conists, fully, 
+  of 6 colors -- 2 for each time of day. Directions are on top left for user. There are two sections for arrays -- one for the 
+  transitioning colors for the circles and the positions for the circles(6 array for the x,y positions of each "layer" of the 
+  circles. */
 function drawMainScene() {
 
   drawBackground(topColor, bottomColor);
 
   fill(255); // Set text color to white
-  noStroke()
+  noStroke() //Directional text does not have outline
   textSize(14);
   textAlign(LEFT, TOP);
   text("Press 'A' for Morning Sky\nPress 'S' for Afternoon Sky\nPress 'D' for Night Sky\nMove mouse to change leaf color\nClick to remove leaves", 20, 20);
@@ -110,7 +121,7 @@ function drawMainScene() {
   // Calculate the color position based on the horizontal position of the mouse
   let colorPosition = map(mouseX, 0, windowWidth, 0, numColors - 1);
 
-  // Separate color positions for the three sets of circles
+  // Separate color positions for the three sets of circles. these colors go all the way to brown
   greenToBrownColorPosition = map(mouseX, 0, windowWidth, 0, customColors.length - 1); // Subtract 2 to exclude last color
   yellowToBrownColorPosition = map(mouseX, 0, windowWidth, 1, customColors.length - 1);
   thirdSetColorPosition = map(mouseX, 0, windowWidth, 2, customColors.length - 1);
@@ -130,15 +141,15 @@ function drawMainScene() {
   circleYPositionsYellowToBrown2 = [585, 715, 540, 670, 600, 700, 900]; 
 
 
+  // Tree trunk length and width
   let trunkLength = 180;
   let trunkWidth = 30;
 
-    // Draw the ground
-    noStroke();
-    fill(84, 33, 10);
-    rect(0, 700, windowWidth); // Left/right, up/down, "size"
+  // Ground
+  noStroke();
+  fill(84, 33, 10);
+  rect(0, 700, windowWidth); // Left/right, up/down, "size"
 
-  // Recursive function to draw trees with trunks and branches 
   // drawTree(left/right (-/+), up/down, size(-/+), , # of recursions,thickness)
   drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
   drawTree(width / 4 - 20, height - 0, trunkLength, PI / 2, 4.5, trunkWidth * 1.3);        //2
@@ -148,20 +159,22 @@ function drawMainScene() {
   drawTree(width / 4 + 1200, height - 0, trunkLength + 80, PI / 2, 5, trunkWidth * 3);     //7
   drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //8
 
-  if (state == 4){ //ALL LEAVES
+  // If statements are decremented using the state variable and the mouseClicked function
+  //drawTree gets called extra here so that the last state is only tree
+  if (state == 4){ //All 3 circle layers;   greenToBrownColorPosition, yellowToBrownColorPosition, thirdSetColorPosition
     drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown); 
     drawCirclesWithColors(circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, fillColorYellowToBrown);
     drawCirclesWithColors(circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2, fillColorYellowToBrown2);
     
   }
-  if (state == 3){ //
+  if (state == 3){ //2 circle layers;   greenToBrownColorPosition, yellowToBrownColorPosition
     drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown);
     drawCirclesWithColors(circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, fillColorYellowToBrown);
   }
-  if (state == 2){
+  if (state == 2){ // thirdSetColorPosition
     drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown);
   }
-  if (state == 1){ //BARE TREES
+  if (state == 1){ //BARE TREES ONLY
     drawTree(width / 4 - 260, height - 230, trunkLength, PI / 2, 4.5, trunkWidth * 0.7);     //1
     drawTree(width / 4 - 20, height - 0, trunkLength, PI / 2, 4.5, trunkWidth * 1.3);        //2
     drawTree(width / 4 + 240, height - 230, trunkLength - 100, PI / 2, 2, trunkWidth * 0.3); //3 
@@ -174,6 +187,8 @@ function drawMainScene() {
 
 /*---------------------------------------------------------------------------------------- FUNCTIONS ---------------------------------------------------------------------------------------- */
 
+/*Function caculateColor calculates the fill colors for the circles according to their starting index in customColors.
+  This functions uses lerpColor to interpolate between all the colors.*/
 function calculateColor(colorPosition, customColors) {
   let colorIndex1 = floor(colorPosition);
   let colorIndex2 = ceil(colorPosition);
@@ -185,7 +200,7 @@ function calculateColor(colorPosition, customColors) {
   // Interpolate between the two closest colors
   let fillColor;
   if (colorIndex1 === colorIndex2) {
-    fillColor = customColors[colorIndex1];
+    fillColor = customColors[colorIndex1]; 
   } else {
     if (colorIndex2 === colorIndex3) {
       // If colorIndex2 and colorIndex3 are the same, use lerpColor between colorIndex1 and colorIndex2
@@ -200,12 +215,13 @@ function calculateColor(colorPosition, customColors) {
   return fillColor;
 }
 
+/* Function drawCirclesWithColors that actually outputs the circles in their postiions with the color gradient fill. */
 function drawCirclesWithColors(xPositions, yPositions, baseColor) {
   let circleCount = xPositions.length;
   for (let i = 0; i < circleCount; i++) {
     let circleX = xPositions[i];
     let circleY = yPositions[i];
-    let circleSize = map(i, 0, circleCount - 1, 50, 250);
+    let circleSize = map(i, 0, circleCount - 1, 50, 250); //circle amount, smallest size, biggest size
 
     fill(baseColor);
     noStroke(); // No outline for circles
@@ -213,6 +229,9 @@ function drawCirclesWithColors(xPositions, yPositions, baseColor) {
   }
 }
 
+/* Function mouseClicked decrements the variable state. This is used the drawMainScene function 
+  So that the circles are momentarilly erased from the screen until the variable state reaches zero
+  (returns state to it's original value). */
 function mouseClicked() {
   state --;
   if (state == 0) {
@@ -220,6 +239,7 @@ function mouseClicked() {
   }
 }
 
+/* drawTree is a recursive function to draw trees with trunks and branches */
 function drawTree(x, y, trunkLength, angle, levels, branchWidth) {
   if (levels > 0) {
     let endX = x + cos(angle) * trunkLength;
@@ -237,6 +257,8 @@ function drawTree(x, y, trunkLength, angle, levels, branchWidth) {
   }
 }
 
+/* Function Keypressed changed the colors of topColor and bottomColor of the background in 
+  the drawMainScence function. 6 colors are used in total. */
 function keyPressed() {
   if (key === 'A' || key === 'a') {
     // 6, 120, 164
@@ -247,11 +269,13 @@ function keyPressed() {
     bottomColor = color(255, 150, 98); // Orangy-pink
   } else if (key === 'D' || key === 'd') {
     topColor = color(4, 1, 17);
-    bottomColor = color(59, 46, 68);
+    bottomColor = color(63, 59, 86);
   }
   drawBackground(topColor, bottomColor);
 }
 
+/*Function drawBackground uses the lerp and map function to draw the gradients for the keyPressed
+  backgrounds. */
 function drawBackground(c1, c2) {
   // Draw the background gradient within a specific region
   for (let i = 0; i < 700; i++) {
