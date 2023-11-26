@@ -94,6 +94,7 @@ code and would use some ideas to help me figure out what I could be doing wrong 
 for me to understand what I’m doing wrong if I look at examples and implement little things to 
 help my code be better.
 
+--------------------------------------------------------------------------------------------------
 
 PROGRAMMING FUNDAMENTALS
 
