@@ -200,3 +200,13 @@ CONCEPTUAL GOALS
 		  happen in life – “normal”, as in everyone experiences the low feelings. Everyone’s lows are 
 		  perspective and different from each other and I feel as though that it is a part of the human 
 		  experience. 
+	
+ACKNOWLEDGEMENTS:
+Anything that has to do with text I got the ideas from google, youtube, and chat gpt 
+LINES 25-27, 35-45 --> youtube
+drawTree Function --> youtube, google
+calculateColor and drawCirclesWithColor --> i did most of it myself, but I hkept getting errors and chat gpt helped me fix it
+drawOpeningScene and drawMainScene --> got the idea to seperate the opening screen and the previous draw() function from google and youtube
+
+also got a bit of help near the end from professor Travis DuBose!
+
