@@ -184,7 +184,11 @@ CONCEPTUAL GOALS
 	   that makes it up—say is important about the world?
 		- I remember having a hard time thinking of what this meant and I received a bit of help from 
 		  the teacher. He said something along the lines of, “Taking something that is usually used for 
-		  efficiency and productivity and turning it into something slow…”. 
+		  efficiency and productivity and turning it into something slow…”. I think what my project satisfyin
+		  about the world is that it's okay to take things slow, to really feel the feelings instead of always
+		  focusing on everyday things -- these everyday routines can make us feel like life is going by so fast 
+		  and when we're at out lowest it's hard to process our feelings because of this. If we take the time to
+		  "go through the seasons" and "grow through the seasons", everything will be okay. :)
 
 	3. How does your code serve as an expression of your sense of the world? In what way is this project 
 	   something that could only be created by you?
