@@ -122,18 +122,19 @@ function drawMainScene() {
   // Calculate the color position based on the horizontal position of the mouse
   let colorPosition = map(mouseX, 0, windowWidth, 0, numColors - 1);
 
-  // Separate color positions for the three sets of circles. these colors go all the way to brown
+  //processes mouseX coordinates relative to windowWidth, to a position within the indices of 
+  //customColor. Resulting value is used to access a specific color in the array based on mouse position
   greenToBrownColorPosition = map(mouseX, 0, windowWidth, 0, customColors.length - 1); // Subtract 2 to exclude last color
   yellowToBrownColorPosition = map(mouseX, 0, windowWidth, 1, customColors.length - 1);
   thirdSetColorPosition = map(mouseX, 0, windowWidth, 2, customColors.length - 1);
 
-  let fillColorGreenToBrown = calculateColor(greenToBrownColorPosition, customColors);
+  let fillColorGreenToBrown = calculateColor(greenToBrownColorPosition, customColors); //fillcolor returned here
   let fillColorYellowToBrown = calculateColor(yellowToBrownColorPosition, customColors);
   let fillColorYellowToBrown2 = calculateColor(thirdSetColorPosition, customColors);
 
   // Define arrays of custom positions for the circles
-   circleXPositionsGreenToBrown = [730, 693, 760, 290, 340, 195, 105, 180, 1100, 1200, 1100, 1580, 1400, 1430, 1630, 1830]; // Left-, right+
-   circleYPositionsGreenToBrown = [530, 568, 580, 310, 370, 400, 405, 300, 500, 500, 400, 450, 580, 450, 300, 400]; // Up+, down-
+  circleXPositionsGreenToBrown = [730, 693, 760, 290, 340, 195, 105, 180, 1100, 1200, 1100, 1580, 1400, 1430, 1630, 1830]; // Left-, right+
+  circleYPositionsGreenToBrown = [530, 568, 580, 310, 370, 400, 405, 300, 500, 500, 400, 450, 580, 450, 300, 400]; // Up+, down-
 
   circleXPositionsYellowToBrown = [713, 1070, 1140, 250, 155, 263, 898, 1810, 1700, 1540]; 
   circleYPositionsYellowToBrown = [570, 690, 670, 360, 430, 445, 465, 530, 480, 600]; 
@@ -161,8 +162,12 @@ function drawMainScene() {
   drawTree(width / 4 + 800, height - 231, trunkLength - 150, PI / 2, 3, trunkWidth * 0.1); //8
 
   // If statements are decremented using the state variable and the mouseClicked function
+
+  //drawCirclesWithColors is called here, circles are outputted based on circle positions and are given their 
+  //fill colors
+
   //drawTree gets called extra here so that the last state is only tree
-  if (state == 4){ //All 3 circle layers;   greenToBrownColorPosition, yellowToBrownColorPosition, thirdSetColorPosition
+  if (state == 4){ //All 3 circle layers; greenToBrownColorPosition, yellowToBrownColorPosition, thirdSetColorPosition
     drawCirclesWithColors(circleXPositionsGreenToBrown, circleYPositionsGreenToBrown, fillColorGreenToBrown); 
     drawCirclesWithColors(circleXPositionsYellowToBrown, circleYPositionsYellowToBrown, fillColorYellowToBrown);
     drawCirclesWithColors(circleXPositionsYellowToBrown2, circleYPositionsYellowToBrown2, fillColorYellowToBrown2);
@@ -190,7 +195,7 @@ function drawMainScene() {
 
 /*Function caculateColor calculates the fill colors for the circles according to their starting index in customColors.
   This functions uses lerpColor to interpolate between all the colors.*/
-function calculateColor(colorPosition, customColors) {
+function calculateColor(colorPosition, customColors) { //colorPosition map(), array
   let colorIndex1 = floor(colorPosition);
   let colorIndex2 = ceil(colorPosition);
   let colorIndex3 = colorIndex1 + 1;
@@ -201,7 +206,7 @@ function calculateColor(colorPosition, customColors) {
   // Interpolate between the two closest colors
   let fillColor;
   if (colorIndex1 === colorIndex2) {
-    fillColor = customColors[colorIndex1]; 
+    fillColor = customColors[colorIndex1]; //fillColor will be first color in customColors array
   } else {
     if (colorIndex2 === colorIndex3) {
       // If colorIndex2 and colorIndex3 are the same, use lerpColor between colorIndex1 and colorIndex2
@@ -213,20 +218,21 @@ function calculateColor(colorPosition, customColors) {
       fillColor = lerpColor(color1, color2, (colorPosition - colorIndex2) / (colorIndex3 - colorIndex2));
     }
   }
-  return fillColor;
+  return fillColor; //used in drawCirclesWithColors
 }
 
-/* Function drawCirclesWithColors that actually outputs the circles in their postiions with the color gradient fill. */
-function drawCirclesWithColors(xPositions, yPositions, baseColor) {
-  let circleCount = xPositions.length;
-  for (let i = 0; i < circleCount; i++) {
-    let circleX = xPositions[i];
-    let circleY = yPositions[i];
+/*Function drawCirclesWithColors that actually outputs the circles in their postiions with the color gradient fill. */
+function drawCirclesWithColors(xPositions, yPositions, baseColor) { //circle X positions, circle Y positions, calculated fill color
+  let circleCount = xPositions.length; //x positions will equal the number of circles.
+  for (let i = 0; i < circleCount; i++) { //increments i until circleCount
+    let circleX = xPositions[i]; //index value in xPosition
+    let circleY = yPositions[i]; //index value in yPosition
     let circleSize = map(i, 0, circleCount - 1, 50, 250); //circle amount, smallest size, biggest size
 
-    fill(baseColor);
+    fill(baseColor); //fillColor calcuated with calculateColor Function
     noStroke(); // No outline for circles
     ellipse(circleX, circleY, circleSize, circleSize);
+    //circles created based on circle position index and size
   }
 }
 
@@ -234,8 +240,8 @@ function drawCirclesWithColors(xPositions, yPositions, baseColor) {
   So that the circles are momentarilly erased from the screen until the variable state reaches zero
   (returns state to it's original value). */
 function mouseClicked() {
-  state --;
-  if (state == 0) {
+  state --; //starts at 4 and is decremented with each click
+  if (state == 0) { //once the state equals 0, the state is reverted back to origianl count
     state = 4;
   }
 }
