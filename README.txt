@@ -94,7 +94,7 @@ code and would use some ideas to help me figure out what I could be doing wrong 
 for me to understand what I’m doing wrong if I look at examples and implement little things to 
 help my code be better.
 
---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
 
 PROGRAMMING FUNDAMENTALS
 
@@ -164,33 +164,35 @@ a basic understanding of how code works, learning JS wasn’t too difficult.
 					- drawBackground() → 
 							- Parameters: topColor, BottomColor
 							- used to interpolate between the RGB values for topColor and BottomColor.
-	CONCEPTUAL GOALS
-		1. Pick a single comment that you wrote, and describe why it is a good comment.
-			- I think the comments that I made for the drawCirclesWithColors were pretty good as they’re 
-			  very detailed (lines 224 - 237). I also have docstring documentation all throughout the 
-			  project and above the functions just stating what the purpose of the function is as what it 
-			  does. I also have comments on almost everything to make it easier to read if I ever come 
-			  back to it. The point of having comments is to be able to come back at some point being able 
-			  to mostly understand what’s going on with the code (I don't think it's possible for comments 
-			  to make you understand things 100%, especially if it’s a bg code). I think I could use 
-			  improvement on my comments, but overall I think they’re pretty good! (I also want to mention 
-			  that no matter how many comments you have on a large code, a person that has never done code 
-			  will not know what’s going on unless you REALLY explain things. So that’s why I think 
-			  comments make things a lot easier but not 100% easier).
 
-		2. What values does your project endorse or recreate? That is, what does your project—and the code 
-		   that makes it up—say is important about the world?
-			- I remember having a hard time thinking of what this meant and I received a bit of help from 
-			  the teacher. He said something along the lines of, “Taking something that is usually used for 
-			  efficiency and productivity and turning it into something slow…”. 
+---------------------------------------------------------------------------------------------------------
+CONCEPTUAL GOALS
+	1. Pick a single comment that you wrote, and describe why it is a good comment.
+		- I think the comments that I made for the drawCirclesWithColors were pretty good as they’re 
+		  very detailed (lines 224 - 237). I also have docstring documentation all throughout the 
+		  project and above the functions just stating what the purpose of the function is as what it 
+		  does. I also have comments on almost everything to make it easier to read if I ever come 
+		  back to it. The point of having comments is to be able to come back at some point being able 
+		  to mostly understand what’s going on with the code (I don't think it's possible for comments 
+		  to make you understand things 100%, especially if it’s a bg code). I think I could use 
+		  improvement on my comments, but overall I think they’re pretty good! (I also want to mention 
+		  that no matter how many comments you have on a large code, a person that has never done code 
+		  will not know what’s going on unless you REALLY explain things. So that’s why I think 
+		  comments make things a lot easier but not 100% easier).
 
-		3. How does your code serve as an expression of your sense of the world? In what way is this project 
-		   something that could only be created by you?
-			- I think if anyone wanted to, they could make this exact project. They could probably do more 
-			  with it too if they wanted to. I think this project is unique to me, but my point of the project 
-			  is to have the meaning of it mean the same thing to other people. Everyone experiences times in 
-			  their lives where things feel so low, like they’ve lost themselves and can never be who they once 
-			  were… My point of the project is to make it known that it’s totally normal for these feelings to 
-			  happen in life – “normal”, as in everyone experiences the low feelings. Everyone’s lows are 
-			  perspective and different from each other and I feel as though that it is a part of the human 
-			  experience. 
+	2. What values does your project endorse or recreate? That is, what does your project—and the code 
+	   that makes it up—say is important about the world?
+		- I remember having a hard time thinking of what this meant and I received a bit of help from 
+		  the teacher. He said something along the lines of, “Taking something that is usually used for 
+		  efficiency and productivity and turning it into something slow…”. 
+
+	3. How does your code serve as an expression of your sense of the world? In what way is this project 
+	   something that could only be created by you?
+		- I think if anyone wanted to, they could make this exact project. They could probably do more 
+		  with it too if they wanted to. I think this project is unique to me, but my point of the project 
+		  is to have the meaning of it mean the same thing to other people. Everyone experiences times in 
+		  their lives where things feel so low, like they’ve lost themselves and can never be who they once 
+		  were… My point of the project is to make it known that it’s totally normal for these feelings to 
+		  happen in life – “normal”, as in everyone experiences the low feelings. Everyone’s lows are 
+		  perspective and different from each other and I feel as though that it is a part of the human 
+		  experience. 
