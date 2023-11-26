@@ -21,7 +21,8 @@ function setup() {
 
   openingScreenStartTime = millis(); // Set the start time for the opening screen
   //canvas
-  createCanvas(windowWidth, windowHeight); // 800, 600
+  // My machine "canvas" - 1920, 923. windowHeight and windowWidth will not work for all resolutions but setting the screen dimensions will
+  createCanvas(1920, 923); 
   topColor = color(4, 89, 121); // Dark blue (top color)
   bottomColor = color(255, 213, 98); // Lighter blue (bottom color)
 
